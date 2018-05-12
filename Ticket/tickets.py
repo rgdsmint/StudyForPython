@@ -107,6 +107,7 @@ leftTicketDTO.to_station={}\
             pt.add_row(train)
         print(pt)
 # 运行程序
+# 增加循环以重复查询
 if __name__ == '__main__':
     while True:
         st = SearchTicket()
