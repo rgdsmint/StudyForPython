@@ -21,16 +21,20 @@ import requests
 from stations import station_code, code_station
 from prettytable import PrettyTable
 
-
+'''
+查票程序
+使用方法如上
+'''
 class SearchTicket:
 
+    # 接受所查票的参数 : 车票类型 起始车站 日期
     def __init__(self):
         self.trainOption = input('-d动车 -g高铁 -k快速 -t特快 -z直达\n请输入您要查询的车次类型(如:-dg) :')
         self.fromStation = input('请输入您出发的城市(如:滁州) :')
         self.toStation = input('请输入您要前往的城市(如:上海) :')
         self.Date = input('请输入日期(如:2018-05-09) :')
         self.train = self.trains()
-
+    # 处理信息  得出官网信息  并写成列表
     def searchTrain(self):
         arguments = {
             'option': self.trainOption,
@@ -50,7 +54,7 @@ leftTicketDTO.to_station={}\
             self.raw_trains = r.json()['data']['result']
         except:
             exit('输入有误')
-
+    # 解析信息  得出各参数
     def trains(self):
         for item in self.raw_trains:
             data_list = item.split('|')
@@ -94,7 +98,7 @@ leftTicketDTO.to_station={}\
                     other_seat
                 ]
                 yield train
-
+    # 将参数可视化
     def pretty_print(self):
         pt = PrettyTable()
         article = '车次 站点 时间 历时  商务座 一等座 二等座 高级软卧 软卧 动卧 硬卧 软座 硬座 无座 其他'.split()
@@ -102,7 +106,7 @@ leftTicketDTO.to_station={}\
         for train in self.train:
             pt.add_row(train)
         print(pt)
-
+# 运行程序
 if __name__ == '__main__':
     while True:
         st = SearchTicket()
