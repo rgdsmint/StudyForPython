@@ -766,3 +766,5 @@ code_station = {'VAP': '北京北', 'BOP': '北京东', 'BJP': '北京', 'VNP': 
                 'ZKE': '曾口', 'ZSN': '左岭', 'ZRQ': '樟木头东', 'ZLN': '驻马店西', 'ZCS': '漳浦', 'FCQ': '肇庆东', 'ZQH': '庄桥',
                 'KWQ': '昭山', 'ZAZ': '钟山西', 'ZXJ': '漳县', 'FYW': '资阳北', 'ZYE': '遵义', 'ZNE': '遵义南', 'ZEJ': '张掖西',
                 'WZW': '资中北', 'ZAP': '涿州东', 'ZNK': '枣庄东', 'ZDC': '卓资东', 'ZAF': '郑州东', 'KVQ': '株洲南'}
+
+stationsChineseName = list(station_code.keys())
