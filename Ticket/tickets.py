@@ -16,7 +16,6 @@ Examples：
     Please input the city you will arrive :北京
     Please input the date(Example:2017-09-27) :2018-03-01
 '''
-from docopt import docopt
 import requests
 from stations import station_code, code_station, stationsChineseName
 from prettytable import PrettyTable
@@ -32,6 +31,7 @@ class SearchTicket:
 
     # 接受所查票的参数 : 车票类型 起始车站 日期
     def __init__(self):
+
         self.trainOption = input('-d动车 -g高铁 -k快速 -t特快 -z直达\n请输入您要查询的车次类型(如:-dg PS:默认全选) :')
         # 如果没有填参数或者参数错误 则按默认进行
         if len(self.trainOption) == 0 or self.trainOption not in '-dgktz' and len(self.trainOption) != 0:
@@ -44,7 +44,7 @@ class SearchTicket:
             self.fromStation = '南京' # 默认南京
             print('\t输入有误 已按默认起始点执行')
 
-        self.toStation = input('请输入您要前往的城市(如:上海 PS:默认上海 :')
+        self.toStation = input('请输入您要前往的城市(如:上海 PS:默认上海) :')
         # 如果参数错误(不在站点名称里面 则按默认进行)
         if self.toStation not in stationsChineseName:
             self.toStation = '上海' # 默认上海
@@ -79,6 +79,7 @@ leftTicketDTO.to_station={}\
 
     # 解析信息  得出各参数
     def trains(self):
+
         for item in self.raw_trains:
             data_list = item.split('|')
             trainNum = data_list[3]
@@ -140,7 +141,7 @@ if __name__ == '__main__':
         st.searchTrain()
         st.pretty_print()
         # 询问是否继续
-        message = input('是否继续?[y/n] PS:默认为n')
+        message = input('是否继续?[y/n] (PS:默认为n): ')
         # 如果不是'y' 则退出
         if message == 'n' or len(message) == 0 or message != 'y':
             exit('程序已结束')
