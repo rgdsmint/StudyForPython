@@ -4,10 +4,15 @@ from prettytable import PrettyTable
 
 
 class UniversityRanking:
+    def __init__(self):
+        self.main()
+    def main(self):
+        self.University()
+        self.getRanking(self.getUrl())
+
     def getUrl(self):
         university = input('请输入您想查询的信息:')
         url = 'http://www.zuihaodaxue.cn/{}'.format(self.UniversityDict[university])
-        print(url)
         return url
 
     def getRanking(self, url):
@@ -65,11 +70,8 @@ class UniversityRanking:
                                '2018学生国际化排名': 'xueshengguojihuapaiming2018.html',
                                }
 
-    def main(self):
-        self.University()
-        self.getRanking(self.getUrl())
+
 
 
 if __name__ == '__main__':
     u = UniversityRanking()
-    u.main()
