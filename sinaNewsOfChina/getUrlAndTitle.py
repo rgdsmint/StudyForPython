@@ -8,11 +8,14 @@ from bs4 import BeautifulSoup
 
 class getUrlAndTitle:
     newsUrlList = []
-    newsTitleList = []
+
+    def __init__(self):
+        self.main('http://news.sina.com.cn/china/')
 
     def main(self, url):
         self.getUrl(url)
-        self.getTitle()
+        self.screenUrl()
+        self.printUrl()
 
     def getUrl(self, url):
         try:
@@ -28,29 +31,25 @@ class getUrlAndTitle:
                 self.newsUrlList.append(newsUrl_2)
         except:
             print('error')
-        # 删除无效链接
-        for item in self.newsUrlList:
-            if not self.getTitle_code(item):
-                pass
 
-    def getTitle_code(self, url):
+    def screenUrl_code(self, url):
         try:
-            requests.urllib3.disable_warnings()
             r = requests.get(url)
             r.encoding = r.apparent_encoding
-            soup = BeautifulSoup(r.text, 'html.parser')
+            s = BeautifulSoup(r.text, 'html.parser')
+            ru = s.select('.main-title')
+            if not ru:
+                del self.newsUrlList[self.newsUrlList.index(url)]
         except:
             print('error')
-        try:
-            result = soup.select('.main-title')[0].text
-            return result
-        except:
-            # 删除无效链接
-            del self.newsUrlList[self.newsUrlList.index(url)]
-            return None
+
+    def screenUrl(self):
+        for link in self.newsUrlList:
+            self.screenUrl_code(link)
 
     def printUrl(self):
         wr = open('E:\\work_python\\sinaNewsOfChina\\news\\urls.txt', 'a')
+        wr.seek(0)
         wr.truncate()
         for link in self.newsUrlList:
             if self.newsUrlList.index(link) == len(self.newsUrlList) - 1:
@@ -58,8 +57,3 @@ class getUrlAndTitle:
             else:
                 wr.write(link + '\n')
         wr.close()
-
-    def getTitle(self):
-        for item in self.newsUrlList:
-            if self.getTitle_code(item):
-                self.newsTitleList.append(self.getTitle_code(item))

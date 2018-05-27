@@ -1,19 +1,20 @@
 from getUrlAndTitle import getUrlAndTitle
 from getContent import getContent
+import re
 
 
 class printNews:
-    def __init__(self, url, flag):
+    def __init__(self, url):
         self.gc = getContent(url)
-        self.title = self.gc.title[flag]
         self.main()
 
     def main(self):
         self.writeNews()
 
     def writeNews(self):
-        wr = open('E:\\work_python\\sinaNewsOfChina\\news\\%s.txt' % (self.title), 'a', encoding='utf-8')
-        wr.write(self.gc.passage + '\n\n-----------------------------\n评论如下:\n\n------------------------')
+        fileName = re.sub('[\\\/:*?"<>|]', ' ', self.gc.newsTitle)
+        wr = open('E:\\work_python\\sinaNewsOfChina\\news\\%s.txt' % (fileName), 'a', encoding='utf-8')
+        wr.write(self.gc.passage + '\n\n-----------------------------\n评论如下:\n\n------------------------\n')
         for n, a, i, d, c in zip(self.gc.commenterNick, self.gc.commenterArea, self.gc.commenterIP, self.gc.commentDate,
                                  self.gc.content):
             wr.write('昵称:' + n + '\n')
@@ -26,12 +27,11 @@ class printNews:
 
 if __name__ == '__main__':
     guat = getUrlAndTitle()
-    guat.main('http://news.sina.com.cn/china/')
 
-    guat.printUrl()
     with open('E:\\work_python\\sinaNewsOfChina\\news\\urls.txt', 'r') as rf:
         urls = []
         for line in rf:
             urls.append(str(line).split('\n')[0])
-    for item, num in zip(urls, range(0, len(guat.newsTitleList))):
-        pn = printNews(item, num)
+
+    for item in urls:
+        pn = printNews(item)

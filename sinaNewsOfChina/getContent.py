@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-from getUrlAndTitle import getUrlAndTitle
 
 '''
 获取新闻内容, 如时间、来源、内文、评论等
@@ -9,19 +8,27 @@ from getUrlAndTitle import getUrlAndTitle
 
 
 class getContent:
+    newsTitle = ''
 
     def __init__(self, url):
         self.main(url)
-        g = getUrlAndTitle()
-        g.main('http://news.sina.com.cn/china/')
-        self.title = g.newsTitleList
-        self.passage = self.date + '\n' + self.source + '\n' + self.article
+        self.passage = '标题:\n' + self.newsTitle + '\n\n' + '时间:\n' + self.date + '\n\n' + '消息来源:\n' + self.source + '\n\n' + '新闻内文:\n\n' + self.article
 
     def main(self, url):
+        self.getTitle(url)
         self.getDate(url)
         self.getSource(url)
         self.getArticle(url)
         self.getComment(url)
+
+    def getTitle(self, url):
+        try:
+            r = requests.get(url)
+            r.encoding = r.apparent_encoding
+            soup = BeautifulSoup(r.text, 'html.parser')
+            self.newsTitle = soup.select('.main-title')[0].text
+        except:
+            print('error')
 
     def getDate(self, url):
         try:
