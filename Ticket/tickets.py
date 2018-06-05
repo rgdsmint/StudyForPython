@@ -41,13 +41,13 @@ class SearchTicket:
         self.fromStation = input('请输入您出发的城市(如:南京 PS:默认南京) :')
         # 如果参数错误(不在站点名称里面 则按默认进行)
         if self.fromStation not in stationsChineseName:
-            self.fromStation = '南京' # 默认南京
+            self.fromStation = '南京'  # 默认南京
             print('\t输入有误 已按默认起始点执行')
 
         self.toStation = input('请输入您要前往的城市(如:上海 PS:默认上海) :')
         # 如果参数错误(不在站点名称里面 则按默认进行)
         if self.toStation not in stationsChineseName:
-            self.toStation = '上海' # 默认上海
+            self.toStation = '上海'  # 默认上海
             print('\t输入有误 已按默认终止点执行')
 
         self.Date = input('请输入日期(如:2018-05-09 PS:默认日期为当天) :')
@@ -121,6 +121,7 @@ leftTicketDTO.to_station={}\
                     no_seat,
                     other_seat
                 ]
+
                 yield train
 
     # 将参数可视化

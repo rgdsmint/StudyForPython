@@ -8,7 +8,7 @@ import re
 def getMessage():
     url = 'https://kyfw.12306.cn/otn/resources/js/\
     framework/station_name.js?station_version=1.9053'
-    requests.packages.urllib3.disable_warnings()
+    requests.urllib3.disable_warnings()
     r = requests.get(url, verify=False)
     patter = u'([\u4e00-\u9fa5]+)\|([A-Z]+)'
     result = dict(re.findall(patter, r.text))

@@ -1,4 +1,3 @@
-# coding:utf-8
 import turtle as t
 
 t.pensize(4)
@@ -38,7 +37,6 @@ t.begin_fill()
 t.circle(5)
 t.color(160,82,45)
 t.end_fill()
-
 t.pu()
 t.seth(0)
 t.fd(20)
@@ -97,7 +95,6 @@ t.circle(-50,50)
 t.circle(-10,120)
 t.circle(-50,54)
 t.end_fill()
-
 t.pu()
 t.seth(90)
 t.fd(-12)

@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-
 def query_IP():
     ip = input('请输入您要查询的ip或域名(输入"exit"可退出):')
     if ip == 'exit':

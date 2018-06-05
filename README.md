@@ -13,7 +13,7 @@
 - 4.PeppaPig (PS.粉红猪小妹, 就是小猪佩奇哈哈哈哈)
     - 用途: 绘出近期大火的小猪佩奇
     - 做法: 通过turtle库 画出小猪佩奇
-- 5.sinaNewsOFChina
+- 5.sinaNewsOfChina
     - 用途:爬取新浪国内新闻网的新闻以及用户评论并写入文件
     - 做法:通过requests、BeautifulSoup爬取新浪新闻网主页采集新闻链接 再爬取单个新闻获取
     内容、用户评论等 最后写入文件
