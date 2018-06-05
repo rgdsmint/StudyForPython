@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import time
 import json
 import random
 ''''''
@@ -17,7 +18,7 @@ class getUrl():
         # 用不同IP去访问要爬去的网站
 
         # 在https://proxy.coderbusy.com/找到的IP地址（不停刷新即可）
-        pro = ['122.152.196.126', '114.215.174.227', '119.185.30.75']
+        pro = ['36.33.32.152', '59.56.252.38', '115.46.74.149', '220.191.100.115', '123.114.61.124']
         # 头信息
         head = {
             'user-Agent': 'Mozilla/5.0(Windows NT 10.0;Win64 x64)AppleWebkit/537.36(KHTML,like Gecko) chrome/58.0.3029.110 Safari/537.36'
@@ -29,9 +30,8 @@ class getUrl():
 %E9%97%A8&page_limit=1&page_start={}'.format(flag)
             try:
                 r = requests.get(url, proxies={'http': random.choice(pro)}, headers=head)
+                time.sleep(2)
                 r.encoding = r.apparent_encoding
-                print(r.status_code)
-                print(r.text)
                 dic = json.loads(r.text)['subjects'][0]
                 movie_rate = dic['rate']
                 movie_title = dic['title']
