@@ -1,7 +1,7 @@
 import requests
 import json
 from urllib import request
-
+import time
 
 def getUrl(url):
     """ 请求网页, 得到页面内容并返回 """
@@ -27,14 +27,16 @@ def parseHtml(html):
 
 def downloadPictures(pictureUrl):
     """ 保存图片 """
+    picture_date = time.strftime('%Y-%m-%d')
     request.urlretrieve(pictureUrl[0],
-                        'D:\\Pictures\\Bing_Today_Picture\\day_6.jpg')
+                        'D:\\Pictures\\Bing_Today_Picture\\%s.jpg'%(picture_date))
 
 
 def downloadDoc(docUrl):
     """ 保存图片相关信息 """
+    doc_date = time.strftime('%Y-%m-%d')
     with open(
-            'D:\\Pictures\\Bing_Today_Picture\\day_6.txt', 'a',
+            'D:\\Pictures\\Bing_Today_Picture\\%s.txt'%(doc_date), 'a',
             encoding='utf-8') as ap:
         ap.write(docUrl[1])
 
