@@ -1,40 +1,23 @@
-'''
-Usage:
-    ticket [-dgktz] <from> <to> <date>
-
-options:
-        -h --help       显示菜单
-        -d              动车
-        -g              高铁
-        -k              快车
-        -t              特快
-        -z              直达
-
-Examples：
-    Please input the trainType you want to search :dgz
-    Please input the city you want leave :南京
-    Please input the city you will arrive :北京
-    Please input the date(Example:2017-09-27) :2018-03-01
-'''
 import requests
 from stations import station_code, code_station, stationsChineseName
 from prettytable import PrettyTable
 import time
 
-'''
-查票程序
-使用方法如上
-'''
 
 
 class SearchTicket:
-
-    # 接受所查票的参数 : 车票类型 起始车站 日期
+    '''
+    查票程序
+    '''
+    
     def __init__(self):
-
-        self.trainOption = input('-d动车 -g高铁 -k快速 -t特快 -z直达\n请输入您要查询的车次类型(如:-dg PS:默认全选) :')
+        '''接受所查票的参数 : 车票类型 起始车站 日期'''
+        self.trainOption = input(
+            '-d动车 -g高铁 -k快速 -t特快 -z直达\n请输入您要查询的车次类型(如:-dg PS:默认全选) :')
         # 如果没有填参数或者参数错误 则按默认进行
-        if len(self.trainOption) == 0 or self.trainOption not in '-dgktz' and len(self.trainOption) != 0:
+        if len(self.trainOption
+               ) == 0 or self.trainOption not in '-dgktz' and len(
+                   self.trainOption) != 0:
             self.trainOption = '-dgktz'  # 默认全选 (-dgktz)
             print('\t输入有误 已按默认类型执行')
 
@@ -51,13 +34,26 @@ class SearchTicket:
             print('\t输入有误 已按默认终止点执行')
 
         self.Date = input('请输入日期(如:2018-05-09 PS:默认日期为当天) :')
-        if len(self.Date) == 0 or len(self.Date) != 10:
+        if self.is_valid_date(self.Date):
+            pass
+        else:
             self.Date = time.strftime('%Y-%m-%d')  # 默认日期为当天
             print('\t输入有误 已按默认时间执行')
         self.train = self.trains()
 
-    # 处理信息  得出官网信息  并写成列表
+    def is_valid_date(self, str):
+        '''判断是否是一个有效的日期字符串'''
+        if len(str) == 10:
+            try:
+                time.strptime(str, "%Y-%m-%d")
+                return True
+            except:
+                return False
+        else:
+            return False
+
     def searchTrain(self):
+        '''处理信息 得出官网信息 并写成列表'''
         arguments = {
             'option': self.trainOption,
             'from_station': station_code.get(self.fromStation, None),
@@ -69,7 +65,8 @@ class SearchTicket:
 leftTicketDTO.train_date={}\
 &leftTicketDTO.from_station={}&\
 leftTicketDTO.to_station={}\
-&purpose_codes=ADULT'.format(arguments['date'], arguments['from_station'], arguments['to_station'])
+&purpose_codes=ADULT'.format(arguments['date'], arguments['from_station'],
+                             arguments['to_station'])
         requests.urllib3.disable_warnings()
         r = requests.get(url, verify=False)
         try:
@@ -77,9 +74,9 @@ leftTicketDTO.to_station={}\
         except:
             exit('输入有误')
 
-    # 解析信息  得出各参数
+    
     def trains(self):
-
+        '''解析信息 得出各参数'''
         for item in self.raw_trains:
             data_list = item.split('|')
             trainNum = data_list[3]
@@ -105,27 +102,18 @@ leftTicketDTO.to_station={}\
                 other_seat = data_list[22] or '--'  # 其它
 
                 train = [
-                    trainNum,
-                    '\n'.join([from_station_name, to_station_name]),
-                    '\n'.join([start_time, arrive_time]),
-                    time_duration,
-                    business_seat,
-                    first_seat,
-                    second_seat,
-                    high_sort_sleep,
-                    sort_sleep,
-                    move_slepp,
-                    hard_sleep,
-                    sort_seat,
-                    hard_seat,
-                    no_seat,
-                    other_seat
+                    trainNum, '\n'.join(
+                        [from_station_name, to_station_name]), '\n'.join([
+                            start_time, arrive_time
+                        ]), time_duration, business_seat, first_seat,
+                    second_seat, high_sort_sleep, sort_sleep, move_slepp,
+                    hard_sleep, sort_seat, hard_seat, no_seat, other_seat
                 ]
 
                 yield train
 
-    # 将参数可视化
     def pretty_print(self):
+        '''将得到的车票相关数据可视化'''
         pt = PrettyTable()
         article = '车次 站点 时间 历时  商务座 一等座 二等座 高级软卧 软卧 动卧 硬卧 软座 硬座 无座 其他'.split()
         pt._set_field_names(article)
@@ -134,9 +122,8 @@ leftTicketDTO.to_station={}\
         print(pt)
 
 
-# 运行程序
-# 增加循环以重复查询
 if __name__ == '__main__':
+    '''运行程序增加循环以重复查询'''
     while True:
         st = SearchTicket()
         st.searchTrain()
