@@ -1,5 +1,5 @@
 import turtle as t
-
+import time
 
 class peppaPig:
     '''画出小猪佩奇'''
@@ -27,6 +27,7 @@ class peppaPig:
         self.body()
         self.hands()
         self.feet()
+        self.tail()
 
     def nose(self):
         '''画出猪的鼻子'''
@@ -316,3 +317,4 @@ class peppaPig:
 
 if __name__ == '__main__':
     peppa = peppaPig()
+    time.sleep(10)
