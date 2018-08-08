@@ -2,19 +2,23 @@ import requests
 from stations import station_code, code_station, stationsChineseName
 from prettytable import PrettyTable
 import time
-
+'''
+此程序意在练手和方便自己
+直接运行即可使用
+使用方式运行即可看到
+'''
 
 
 class SearchTicket:
     '''
     查票程序
     '''
-    
+
     def __init__(self):
         '''接受所查票的参数 : 车票类型 起始车站 日期'''
         self.trainOption = input(
             '-d动车 -g高铁 -k快速 -t特快 -z直达\n请输入您要查询的车次类型(如:-dg PS:默认全选) :')
-        # 如果没有填参数或者参数错误 则按默认进行
+        # 如果没有填参数或者参数错误 则按默认执行
         if len(self.trainOption
                ) == 0 or self.trainOption not in '-dgktz' and len(
                    self.trainOption) != 0:
@@ -22,18 +26,19 @@ class SearchTicket:
             print('\t输入有误 已按默认类型执行')
 
         self.fromStation = input('请输入您出发的城市(如:南京 PS:默认南京) :')
-        # 如果参数错误(不在站点名称里面 则按默认进行)
+        # 如果参数错误(不在站点名称里面 则按默认执行)
         if self.fromStation not in stationsChineseName:
             self.fromStation = '南京'  # 默认南京
             print('\t输入有误 已按默认起始点执行')
 
         self.toStation = input('请输入您要前往的城市(如:上海 PS:默认上海) :')
-        # 如果参数错误(不在站点名称里面 则按默认进行)
+        # 如果参数错误(不在站点名称里面 则按默认执行)
         if self.toStation not in stationsChineseName:
             self.toStation = '上海'  # 默认上海
             print('\t输入有误 已按默认终止点执行')
 
         self.Date = input('请输入日期(如:2018-05-09 PS:默认日期为当天) :')
+        # 如果参数错误(不为正确日期格式 则按默认时间执行))
         if self.is_valid_date(self.Date):
             pass
         else:
@@ -74,7 +79,6 @@ leftTicketDTO.to_station={}\
         except:
             exit('输入有误')
 
-    
     def trains(self):
         '''解析信息 得出各参数'''
         for item in self.raw_trains:
@@ -131,5 +135,5 @@ if __name__ == '__main__':
         # 询问是否继续
         message = input('是否继续?[y/n] (PS:默认为n): ')
         # 如果不是'y' 则退出
-        if message == 'n' or len(message) == 0 or message != 'y':
+        if message != 'y':
             exit('程序已结束')
