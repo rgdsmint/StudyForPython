@@ -316,4 +316,3 @@ class peppaPig:
 
 if __name__ == '__main__':
     peppa = peppaPig()
-    main()
