@@ -2,6 +2,9 @@ import requests
 from stations import station_code, code_station, stationsChineseName
 from prettytable import PrettyTable
 import time
+import colorama
+from colorama import Fore
+import platform
 '''
 此程序意在练手和方便自己
 直接运行即可使用
@@ -81,6 +84,9 @@ leftTicketDTO.to_station={}\
 
     def trains(self):
         '''解析信息 得出各参数'''
+        v_system = platform.system()  # 获取操作系统信息(因为Windows需要特殊处理)
+        if v_system == 'Windows':  # 如果系统为Windows 则作处理
+            colorama.init(autoreset=True)
         for item in self.raw_trains:
             data_list = item.split('|')
             trainNum = data_list[3]
@@ -104,14 +110,16 @@ leftTicketDTO.to_station={}\
                 hard_seat = data_list[29] or '--'  # 硬座
                 no_seat = data_list[26] or '--'  # 无座
                 other_seat = data_list[22] or '--'  # 其它
-
                 train = [
-                    trainNum, '\n'.join(
-                        [from_station_name, to_station_name]), '\n'.join([
-                            start_time, arrive_time
-                        ]), time_duration, business_seat, first_seat,
-                    second_seat, high_sort_sleep, sort_sleep, move_slepp,
-                    hard_sleep, sort_seat, hard_seat, no_seat, other_seat
+                    trainNum, '\n'.join([
+                        Fore.RED + from_station_name + Fore.RESET,
+                        Fore.GREEN + to_station_name + Fore.RESET
+                    ]), '\n'.join([
+                        Fore.RED + start_time + Fore.RESET,
+                        Fore.GREEN + arrive_time + Fore.RESET
+                    ]), time_duration, business_seat, first_seat, second_seat,
+                    high_sort_sleep, sort_sleep, move_slepp, hard_sleep,
+                    sort_seat, hard_seat, no_seat, other_seat
                 ]
 
                 yield train
