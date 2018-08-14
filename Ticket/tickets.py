@@ -21,12 +21,10 @@ class SearchTicket:
         '''接受所查票的参数 : 车票类型 起始车站 日期'''
         print(Fore.LIGHTYELLOW_EX + '##-d动车 -g高铁 -k快速 -t特快 -z直达##\n' +
               Fore.RESET)
-        self.trainOption = input('>>> 请输入您要查询的车次类型(如:-dg PS:默认全选) :')
+        self.trainOption = input('>>> 请输入您要查询的车次类型(如:dg PS:默认全选) :')
         # 如果没有填参数或者参数错误 则按默认执行
-        if len(self.trainOption
-               ) == 0 or self.trainOption not in '-dgktz' and len(
-                   self.trainOption) != 0:
-            self.trainOption = '-dgktz'  # 默认全选 (-dgktz)
+        if self.trainOption not in 'dgktz' or len(self.trainOption) == 0:
+            self.trainOption = 'dgktz'  # 默认全选 (dgktz)
             print(Fore.YELLOW + '\t输入有误 已按默认类型执行\n' + Fore.RESET)
 
         self.fromStation = input('>>> 请输入您出发的城市(如:南京 PS:默认南京) :')
