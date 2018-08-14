@@ -159,4 +159,4 @@ if __name__ == '__main__':
         message.lower()
         # 如果为"n" 则退出
         if message == 'n':
-            exit(Fore.YELLOW + '程序已结束')
+            exit(Fore.YELLOW + '程序已结束' + Fore.RESET)
