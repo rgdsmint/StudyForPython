@@ -19,26 +19,27 @@ class SearchTicket:
 
     def __init__(self):
         '''接受所查票的参数 : 车票类型 起始车站 日期'''
-        print(Fore.LIGHTYELLOW_EX + '##-d动车 -g高铁 -k快速 -t特快 -z直达##\n' + Fore.RESET)
+        print(Fore.LIGHTYELLOW_EX + '##-d动车 -g高铁 -k快速 -t特快 -z直达##\n' +
+              Fore.RESET)
         self.trainOption = input('>>> 请输入您要查询的车次类型(如:-dg PS:默认全选) :')
         # 如果没有填参数或者参数错误 则按默认执行
         if len(self.trainOption
                ) == 0 or self.trainOption not in '-dgktz' and len(
                    self.trainOption) != 0:
             self.trainOption = '-dgktz'  # 默认全选 (-dgktz)
-            print(Fore.YELLOW + '\t输入有误 已按默认类型执行\n')
+            print(Fore.YELLOW + '\t输入有误 已按默认类型执行\n' + Fore.RESET)
 
         self.fromStation = input('>>> 请输入您出发的城市(如:南京 PS:默认南京) :')
         # 如果参数错误(不在站点名称里面 则按默认执行)
         if self.fromStation not in stationsChineseName:
             self.fromStation = '南京'  # 默认南京
-            print(Fore.YELLOW + '\t输入有误 已按默认起始点执行\n')
+            print(Fore.YELLOW + '\t输入有误 已按默认起始点执行\n' + Fore.RESET)
 
         self.toStation = input('>>> 请输入您要前往的城市(如:上海 PS:默认上海) :')
         # 如果参数错误(不在站点名称里面 则按默认执行)
         if self.toStation not in stationsChineseName:
             self.toStation = '上海'  # 默认上海
-            print(Fore.YELLOW + '\t输入有误 已按默认终止点执行\n')
+            print(Fore.YELLOW + '\t输入有误 已按默认终止点执行\n' + Fore.RESET)
 
         self.Date = input('>>> 请输入日期(如:2018-05-09 PS:默认日期为当天) :')
         # 如果参数错误(不为正确日期格式 则按默认时间执行))
@@ -46,7 +47,7 @@ class SearchTicket:
             pass
         else:
             self.Date = time.strftime('%Y-%m-%d')  # 默认日期为当天
-            print(Fore.YELLOW + '\t输入有误 已按默认时间执行\n')
+            print(Fore.YELLOW + '\t输入有误 已按默认时间执行\n' + Fore.RESET)
         self.train = self.trains()
 
     def is_valid_date(self, str):
@@ -110,12 +111,11 @@ leftTicketDTO.to_station={}\
                 train = [
                     Fore.CYAN + trainNum + Fore.RESET, '\n'.join([
                         Fore.RED + from_station_name + Fore.RESET,
-                        Fore.LIGHTGREEN_EX+ to_station_name + Fore.RESET
+                        Fore.LIGHTGREEN_EX + to_station_name + Fore.RESET
                     ]), '\n'.join([
                         Fore.RED + start_time + Fore.RESET,
                         Fore.LIGHTGREEN_EX + arrive_time + Fore.RESET
-                    ]), 
-                    Fore.BLUE + time_duration + Fore.RESET,
+                    ]), Fore.BLUE + time_duration + Fore.RESET,
                     Fore.MAGENTA + business_seat + Fore.RESET,
                     Fore.LIGHTCYAN_EX + first_seat + Fore.RESET,
                     Fore.LIGHTBLUE_EX + second_seat + Fore.RESET,
