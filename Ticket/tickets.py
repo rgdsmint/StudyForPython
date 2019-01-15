@@ -79,7 +79,8 @@ leftTicketDTO.to_station={}\
         try:
             self.raw_trains = r.json()['data']['result']
         except:
-            exit('输入有误')
+            print(url)
+            exit('输入有误或url失效')
 
     def trains(self):
         '''解析信息 得出各参数'''
