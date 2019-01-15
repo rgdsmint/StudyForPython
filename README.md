@@ -34,3 +34,7 @@
     - 用途: 展示中国大学排名
     - 做法: 通过requests、BeautifulSoup、re制作简易爬虫 爬取最好大学网的信息 并用PrettyTable
     将其漂亮地输出在屏幕上
+ 
+- 9.textProBar
+    - 用途: 文本进度条
+    - 做法: 通过print控制输出实现文本进度条
