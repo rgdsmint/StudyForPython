@@ -1,4 +1,4 @@
-# python- python一些基础型小Demo(学习用）
+# Python一些小Demo(学习用）
 - AsciiPicture
     - 描述: 将图片变成字符画
     - 方式: 使用PIL库处理传入的图片 输出在屏幕上 然后写入文件
