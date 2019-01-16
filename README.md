@@ -12,11 +12,11 @@
 	- 描述: 日历
 	- 方式: 在控制台打印日历(还没做完)
 
-ChickenAndRabbit
+- ChickenAndRabbit
 	- 描述: 用代码求解鸡兔同笼
 	- 方式: 小学学的
 
-ComputePI
+- ComputePI
 	- 描述: 计算圆周率PI(π)
 	- 方式: 泰勒级数求圆周率的近似值
 
