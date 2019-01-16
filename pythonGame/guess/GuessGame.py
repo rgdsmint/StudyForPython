@@ -35,14 +35,18 @@ class Guess:
 
     def loading(self):
         '''实现加载过程(伪)'''
-
-        for item in range(51):
-            sys.stdout.write('#')
-            sys.stdout.flush()
-            time.sleep(0.2)
-            if item == 50:
-                print('>>>')
-                print()
+        scale = 60
+        print("游戏加载".center(scale // 2, "-"))
+        startTime = time.perf_counter()
+        for i in range(scale + 1):
+            stars = "*" * i
+            points = "." * (scale - i)
+            persent = (i / scale) * 100
+            passTime = time.perf_counter() - startTime
+            print("\r{:^3.0f}%[{}->{}]{:.2f}s"
+                .format(persent, stars, points, passTime), end="")
+            time.sleep(0.1)
+        print("\n" + "加载完成".center(scale // 2, "-"))
 
     def menu(self):
         '''显示规则菜单'''
