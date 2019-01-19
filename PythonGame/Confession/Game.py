@@ -19,7 +19,7 @@ def button(text, x, y, w, h, color, screen):
 
 # 标题
 def title(text, screen, scale, color=(17, 17, 17)):
-    font = pygame.font.Font('E:\\pythonGame\\BiaoBai\\font\\simkai.ttf', WIDTH // (len(text) * 2))
+    font = pygame.font.Font('BiaoBai/font/simkai.ttf', WIDTH // (len(text) * 2))
     textRender = font.render(text, True, color)
     textRect = textRender.get_rect()
     textRect.midtop = (WIDTH / scale[0], HEIGHT / scale[1])
