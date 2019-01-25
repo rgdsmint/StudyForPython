@@ -5,12 +5,13 @@ from pygame.locals import *
 
 WIDTH, HEIGHT = 600, 500
 BACKGROUND = (232, 232, 232)
+Path = "E:\\WorkPython\\PythonDemo\\PythonGame\\Confession"  # Game.py 文件所在的目录
 
 
 # 按钮
 def button(text, x, y, w, h, color, screen):
     pygame.draw.rect(screen, color, (x, y, w, h))
-    font = pygame.font.Font('E:\\pythonGame\\BiaoBai\\font\\simkai.ttf', 20)
+    font = pygame.font.Font('{}\\font\\simkai.ttf'.format(Path), 20)
     textRender = font.render(text, True, (0, 0, 0))
     textRect = textRender.get_rect()
     textRect.center = ((x + w / 2), (y + h / 2))
@@ -19,7 +20,8 @@ def button(text, x, y, w, h, color, screen):
 
 # 标题
 def title(text, screen, scale, color=(17, 17, 17)):
-    font = pygame.font.Font('BiaoBai/font/simkai.ttf', WIDTH // (len(text) * 2))
+    font = pygame.font.Font('{}\\font\\simkai.ttf'.format(Path),
+                            WIDTH // (len(text) * 2))
     textRender = font.render(text, True, color)
     textRect = textRender.get_rect()
     textRect.midtop = (WIDTH / scale[0], HEIGHT / scale[1])
@@ -35,7 +37,8 @@ def get_random_pos():
 # 点击喜欢按钮后显示的页面
 def show_like_interface(text, screen, color=(255, 0, 0)):
     screen.fill(BACKGROUND)
-    font = pygame.font.Font('E:\\pythonGame\\BiaoBai\\font\\simkai.ttf', WIDTH // (len(text)))
+    font = pygame.font.Font('{}\\font\\simkai.ttf'.format(Path),
+                            WIDTH // (len(text)))
     textRender = font.render(text, True, color)
     textRect = textRender.get_rect()
     textRect.midtop = (WIDTH / 2, HEIGHT / 2)
@@ -54,7 +57,7 @@ def main():
     screen = pygame.display.set_mode((WIDTH, HEIGHT), 0, 32)
     pygame.display.set_caption('FROM一个喜欢你很久的小哥哥(划掉!)')
     clock = pygame.time.Clock()
-    pygame.mixer.music.load('E:\\pythonGame\\BiaoBai\\music\\1.mp3')
+    pygame.mixer.music.load('{}\\music\\1.mp3'.format(Path))
     pygame.mixer.music.play(-1, 30.0)
     pygame.mixer.music.set_volume(0.25)
     unlike_pos_x = 330
@@ -69,7 +72,7 @@ def main():
     like_color = (205, 96, 144)
     while running:
         screen.fill(BACKGROUND)
-        img = pygame.image.load("E:\\pythonGame\\BiaoBai\\imgs\\1.png")
+        img = pygame.image.load("{}\\imgs\\1.png".format(Path))
         imgRect = img.get_rect()
         imgRect.midtop = WIDTH // 2, HEIGHT // 4
         screen.blit(img, imgRect)
