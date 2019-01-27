@@ -51,7 +51,11 @@
 		- GuessFist
 			- 描述: 猜拳小游戏
 			- 方式: 命令行输入
-
+			
+- QueryFastMail
+    - 描述: 命令行查询快递
+    - 方式: 通过requests、json库解析相应接口输出到命令行
+    
 - SinaNewsOfChina
     - 描述: 爬取新浪国内新闻网的新闻以及用户评论并写入文件
     - 方式: 通过requests、BeautifulSoup爬取新浪新闻网主页采集新闻链接 再爬取单个新闻获取
