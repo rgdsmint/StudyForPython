@@ -54,6 +54,9 @@ class Query:
 
 
 if __name__ == '__main__':
-    numOfFastMail = input("请输入快递单号:")
-    print()
-    query = Query(numOfFastMail)
+    while True:
+        numOfFastMail = input("请输入快递单号(输入n退出):")
+        if numOfFastMail == "n":
+            exit()
+        print()
+        query = Query(numOfFastMail)
