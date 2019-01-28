@@ -1,5 +1,5 @@
 import requests
-from stations import station_code, code_station, stationsChineseName
+from Stations import station_code, code_station, stationsChineseName
 from prettytable import PrettyTable
 import time
 import colorama
