@@ -53,10 +53,65 @@ class Query:
             count += 1
 
 
+class SetFile:
+    def __init__(self, arg):
+        if arg == 2:
+            while True:
+                numOfFastMail = input("输入要添加的快递编号(输入n可退出):")
+                if numOfFastMail == 'n':
+                    break
+                fastMailMsg = input("输入备注(可为空):")
+                self.addFile(numOfFastMail, fastMailMsg)
+        else:
+            self.showFile()
+
+    def addFile(self, num="", msg=""):
+        with open('Wait.json', 'r', encoding='utf-8') as file:
+            f = file.read()
+            fastMailDic = json.loads(f)
+        if num in fastMailDic.keys():
+            print('此单号已存在')
+            print()
+        else:
+            fastMailDic[num] = msg
+            jsonStr = json.dumps(fastMailDic, indent=4)
+            with open('Wait.json', 'w', encoding="utf-8") as jsonFile:
+                jsonFile.write(jsonStr)
+            print("添加成功")
+            print()
+
+    def showFile(self):
+        with open('Wait.json', 'r', encoding='utf-8') as file:
+            f = file.read()
+            fastMailDic = json.loads(f)
+        fastMailList = list(fastMailDic)
+        while True:
+            count = 0
+            while count < len(fastMailList):
+                print("{}.单号:{}\t备注:{}".format(count + 1, fastMailList[count], fastMailDic[fastMailList[count]]))
+                count += 1
+            op = int(input("查看(输入0退出):"))
+            if op == 0:
+                print()
+                break
+            query = Query(fastMailList[op - 1])
+
+
 if __name__ == '__main__':
     while True:
-        numOfFastMail = input("请输入快递单号(输入n退出):")
-        if numOfFastMail == "n":
+        option = int(input("1.直接查询\n"
+                           "2.新建查询项(以后直接查看)\n"
+                           "3.查看已有查询项\n"
+                           "请选择您需要的选项(输入不在选项内的数字退出):"))
+        if option == 1:
+            while True:
+                numOfFastMail = input("请输入快递单号(输入n退出):")
+                if numOfFastMail == "n":
+                    print()
+                    break
+                print()
+                query = Query(numOfFastMail)
+        elif (option == 2) or (option == 3):
+            SetFile(option)
+        else:
             exit()
-        print()
-        query = Query(numOfFastMail)
