@@ -54,12 +54,18 @@ class Query:
         self.fastMailPosition.clear()
         self.fastMailTime.clear()
 
+
 class SetFile:
+    fastMailList = []
+    fastMailDic = {}
+
     def __init__(self, arg):
+        self.updateFile()
         if arg == 2:
             while True:
                 numOfFastMail = input("输入要添加的快递编号(输入n可退出):")
                 if numOfFastMail == 'n':
+                    print()
                     break
                 fastMailMsg = input("输入备注(可为空):")
                 self.addFile(numOfFastMail, fastMailMsg)
@@ -80,30 +86,91 @@ class SetFile:
                 jsonFile.write(jsonStr)
             print("添加成功")
             print()
+            self.updateFile()
 
-    def showFile(self):
+    def delFile(self, num):
         with open('Wait.json', 'r', encoding='utf-8') as file:
             f = file.read()
             fastMailDic = json.loads(f)
-        fastMailList = list(fastMailDic)
+        if num not in fastMailDic.keys():
+            print("此单号不存在或已删除")
+            print()
+        else:
+            numOfFastMail = fastMailDic.pop(num)
+            jsonStr = json.dumps(fastMailDic, indent=4)
+            with open('Wait.json', 'w', encoding="utf-8") as jsonFile:
+                jsonFile.write(jsonStr)
+            print("删除成功")
+            print()
+            self.updateFile()
+
+    def showFile(self):
         while True:
             count = 0
-            while count < len(fastMailList):
-                print("{}.单号:{}\t备注:{}".format(count + 1, fastMailList[count], fastMailDic[fastMailList[count]]))
+            while count < len(self.fastMailList):
+                print("[{}]单号:{}\t备注:{}".format(count + 1, self.fastMailList[count],
+                                                self.fastMailDic[self.fastMailList[count]]))
                 count += 1
-            op = int(input("查看(输入0退出):"))
+            print()
+            op = int(input("1.查看\n"
+                           "2.删除\n"
+                           "(输入0退出):"))
             if op == 0:
                 print()
                 break
-            query = Query(fastMailList[op - 1])
+            elif op == 2:
+                print()
+                while True:
+                    count = 0
+                    if len(self.fastMailList) == 0:
+                        print("你没有添加查询项")
+                    else:
+                        while count < len(self.fastMailList):
+                            print(
+                                "[{}]单号:{}\t备注:{}".format(count + 1, self.fastMailList[count],
+                                                          self.fastMailDic[self.fastMailList[count]]))
+                            count += 1
+                    print()
+                    opNum = int(input("输入要删除快递的序列号(输入0退出):"))
+                    if opNum != 0:
+                        self.delFile(self.fastMailList[opNum - 1])
+                    else:
+                        print()
+                        break
+            else:
+                print()
+                while True:
+                    count = 0
+                    if len(self.fastMailList) == 0:
+                        print("你没有添加查询项")
+                    else:
+                        while count < len(self.fastMailList):
+                            print(
+                                "[{}]单号:{}\t备注:{}".format(count + 1, self.fastMailList[count],
+                                                          self.fastMailDic[self.fastMailList[count]]))
+                            count += 1
+                    print()
+                    opNum = int(input("输入要查看快递的序列号(输入0退出):"))
+                    if opNum != 0:
+                        query = Query(self.fastMailList[opNum - 1])
+                    else:
+                        print()
+                        break
+
+    def updateFile(self):
+        with open('Wait.json', 'r', encoding='utf-8') as file:
+            f = file.read()
+            self.fastMailDic = json.loads(f)
+        self.fastMailList = list(self.fastMailDic)
 
 
 if __name__ == '__main__':
     while True:
         option = int(input("1.直接查询\n"
                            "2.新建查询项(以后直接查看)\n"
-                           "3.查看已有查询项\n"
+                           "3.查看或删除已有查询项\n"
                            "请选择您需要的选项(输入不在选项内的数字退出):"))
+        print()
         if option == 1:
             while True:
                 numOfFastMail = input("请输入快递单号(输入n退出):")
