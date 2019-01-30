@@ -51,7 +51,8 @@ class Query:
             print(self.fastMailPosition[count])
             print(self.fastMailTime[count], end="\n\n")
             count += 1
-
+        self.fastMailPosition.clear()
+        self.fastMailTime.clear()
 
 class SetFile:
     def __init__(self, arg):
