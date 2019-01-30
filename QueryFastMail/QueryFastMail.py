@@ -107,9 +107,13 @@ class SetFile:
     def showFile(self):
         while True:
             count = 0
-            while count < len(self.fastMailList):
-                print("[{}]单号:{}\t备注:{}".format(count + 1, self.fastMailList[count],
-                                                self.fastMailDic[self.fastMailList[count]]))
+            if len(self.fastMailList) == 0:
+                print("[你没有添加查询项]")
+            else:
+                while count < len(self.fastMailList):
+                    print(
+                        "[{}]单号:{}\t备注:{}".format(count + 1, self.fastMailList[count],
+                                                  self.fastMailDic[self.fastMailList[count]]))
                 count += 1
             print()
             op = int(input("1.查看\n"
@@ -123,7 +127,7 @@ class SetFile:
                 while True:
                     count = 0
                     if len(self.fastMailList) == 0:
-                        print("你没有添加查询项")
+                        print("[你没有添加查询项]")
                     else:
                         while count < len(self.fastMailList):
                             print(
@@ -142,7 +146,7 @@ class SetFile:
                 while True:
                     count = 0
                     if len(self.fastMailList) == 0:
-                        print("你没有添加查询项")
+                        print("[你没有添加查询项]")
                     else:
                         while count < len(self.fastMailList):
                             print(
