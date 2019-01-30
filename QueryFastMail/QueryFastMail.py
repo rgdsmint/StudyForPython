@@ -13,7 +13,7 @@ class Query:
     fastMailTime = []  # 快递时间相关信息
     fastMailPosition = []  # 快递所在地相关信息
     fastMailHostDict = {"zhongtong": "中通快递", "yuantong": "圆通速递", "jd": "京东快递", "shentong": "申通快递", "ems": "邮政EMS",
-                        "yunda": "韵达速递"}  # 对应快递代码快递名称
+                        "yunda": "韵达快递", "shunfeng": "顺丰快递"}  # 对应快递代码快递名称
 
     def __init__(self, numOfFastMail):
         self.numOfFastMail = numOfFastMail
@@ -106,16 +106,7 @@ class SetFile:
 
     def showFile(self):
         while True:
-            count = 0
-            if len(self.fastMailList) == 0:
-                print("[你没有添加查询项]")
-            else:
-                while count < len(self.fastMailList):
-                    print(
-                        "[{}]单号:{}\t备注:{}".format(count + 1, self.fastMailList[count],
-                                                  self.fastMailDic[self.fastMailList[count]]))
-                count += 1
-            print()
+            self.printFile()           
             op = int(input("1.查看\n"
                            "2.删除\n"
                            "(输入0退出):"))
@@ -125,15 +116,7 @@ class SetFile:
             elif op == 2:
                 print()
                 while True:
-                    count = 0
-                    if len(self.fastMailList) == 0:
-                        print("[你没有添加查询项]")
-                    else:
-                        while count < len(self.fastMailList):
-                            print(
-                                "[{}]单号:{}\t备注:{}".format(count + 1, self.fastMailList[count],
-                                                          self.fastMailDic[self.fastMailList[count]]))
-                            count += 1
+                    self.printFile() 
                     print()
                     opNum = int(input("输入要删除快递的序列号(输入0退出):"))
                     if opNum != 0:
@@ -144,23 +127,25 @@ class SetFile:
             else:
                 print()
                 while True:
-                    count = 0
-                    if len(self.fastMailList) == 0:
-                        print("[你没有添加查询项]")
-                    else:
-                        while count < len(self.fastMailList):
-                            print(
-                                "[{}]单号:{}\t备注:{}".format(count + 1, self.fastMailList[count],
-                                                          self.fastMailDic[self.fastMailList[count]]))
-                            count += 1
-                    print()
+                    self.printFile() 
                     opNum = int(input("输入要查看快递的序列号(输入0退出):"))
                     if opNum != 0:
                         query = Query(self.fastMailList[opNum - 1])
                     else:
                         print()
                         break
-
+                        
+    def printFile(self):
+        if len(self.fastMailList) == 0:
+                print("[你没有添加查询项]")
+        else:
+            count = 0
+            while count < len(self.fastMailList):
+                print(
+                    "[{}]单号:{}\t备注:{}".format(count + 1, self.fastMailList[count],
+                                                self.fastMailDic[self.fastMailList[count]]))
+                count += 1
+        print()
     def updateFile(self):
         with open('Wait.json', 'r', encoding='utf-8') as file:
             f = file.read()
