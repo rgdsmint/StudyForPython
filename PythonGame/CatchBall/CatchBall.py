@@ -36,7 +36,7 @@ while True:
                                         if pressed_array[index]:
                                             if index == 2:
                                                 state = not state
-                        state = not state                                            
+                        state = not state
     mouse_x, mouse_y = pg.mouse.get_pos()
     pg.draw.circle(game_window, ball_color, (ball_x, ball_y), 20)
     pg.draw.rect(game_window, rect_color, (mouse_x, 490, 100, 10))
@@ -62,7 +62,8 @@ while True:
                 move_x -= 1
             move_y -= 1
         interval += 0.00005
-    elif ball_y >= 480 and (ball_x <= mouse_x - 20 or ball_x >= mouse_x + 100 + 20):
+    elif ball_y >= 480 and (ball_x <= mouse_x - 20
+                            or ball_x >= mouse_x + 100 + 20):
         break
     pg.display.update()
     time.sleep(interval)
