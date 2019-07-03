@@ -8,10 +8,6 @@
 	- AboutNetwork
 		- 描述: 关于网络编程的相关代码
 
-- ChickenAndRabbit
-	- 描述: 用代码求解鸡兔同笼
-	- 方式: 小学学的
-
 - ComputePI
 	- 描述: 计算圆周率PI(π)
 	- 方式: 泰勒级数求圆周率的近似值
